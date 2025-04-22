@@ -1,0 +1,3 @@
+tqdm
+pytorch-ignite==0.1.0
+torchsummary

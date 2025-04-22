@@ -1,0 +1,9 @@
+name: AnimPortrait3D
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.10
+  - pip=24.0
+    
+
