@@ -122,7 +122,7 @@ class StableDiffusionImageCustomPipeline(
         Args:
             image (`Image.Image` or `List[Image.Image]` or `torch.FloatTensor`):
                 Image or images to guide image generation. If you provide a tensor, it needs to be compatible with
-                [`CLIPImageProcessor`](https://huggingface.co//media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/sd-image-variations-diffusers/blob/main/feature_extractor/preprocessor_config.json).
+                [`CLIPImageProcessor`](https://huggingface.co/lambdalabs/sd-image-variations-diffusers/blob/main/feature_extractor/preprocessor_config.json).
             height (`int`, *optional*, defaults to `self.unet.config.sample_size * self.vae_scale_factor`):
                 The height in pixels of the generated image.
             width (`int`, *optional*, defaults to `self.unet.config.sample_size * self.vae_scale_factor`):
@@ -173,7 +173,7 @@ class StableDiffusionImageCustomPipeline(
         import requests
 
         pipe = StableDiffusionImageVariationPipeline.from_pretrained(
-            "/media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/sd-image-variations-diffusers", revision="v2.0"
+            "lambdalabs/sd-image-variations-diffusers", revision="v2.0"
         )
         pipe = pipe.to("cuda")
 

@@ -38,7 +38,7 @@ def run_sr_fast(source_pils, scale=4):
     else:
         upsampler = RealESRGANer(
             scale=4,
-            onnx_path="/media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/realesrgan-x4.onnx",
+            onnx_path="./ckpt/realesrgan-x4.onnx",
             tile=0,
             tile_pad=10,
             pre_pad=0,

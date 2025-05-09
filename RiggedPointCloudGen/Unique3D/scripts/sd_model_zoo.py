@@ -29,7 +29,7 @@ def copied_cache_model(func):
             return func(*args, **kwargs)
     return wrapper
 
-def model_from_ckpt_or_pretrained(ckpt_or_pretrained, model_cls, original_config_file='/media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/v1-inference.yaml', torch_dtype=torch.float16, **kwargs):
+def model_from_ckpt_or_pretrained(ckpt_or_pretrained, model_cls, original_config_file='./ckpt/v1-inference.yaml', torch_dtype=torch.float16, **kwargs):
     if ckpt_or_pretrained.endswith(".safetensors"):
         pipe = model_cls.from_single_file(ckpt_or_pretrained, original_config_file=original_config_file, torch_dtype=torch_dtype, **kwargs)
     else:

@@ -114,16 +114,6 @@ def get_visible_faces(meshes: Meshes, cameras: CamerasBase, resolution=1024):
     pix_to_face = pix2faces_renderer.render_pix2faces_nvdiff(
         meshes, cameras, H=resolution, W=resolution)
 
-    # save for debug
-    # import PIL.Image as Image
-    # import numpy as np
-    # img = (pix_to_face - pix_to_face.min()) / \
-    #     (pix_to_face.max() - pix_to_face.min()) * 255
-    # img = img.permute(1, 2, 0).cpu().numpy().astype(np.uint8)
-    # img = np.clip(img, 0, 255)
-    # img = np.concatenate([img, img, img], axis=-1)
-    # Image.fromarray(img).save(
-    #     '/home/yiqian/code/3DAvatar/high-quality-Portrait3D-mesh-based/out_mesh_gen_unique3d/pretrained_007/unique3d_mesh/pix_to_face.png')
 
     unique_faces = torch.unique(pix_to_face.flatten())
     unique_faces = unique_faces[unique_faces != -1]

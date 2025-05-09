@@ -291,8 +291,7 @@ class ConfigurableUNet2DConditionModel(Configurable, IPAdapterMixin):
             # setup reference attention processor
             if attn_config.self_attn_ref_other_model_name == "self":
                 raise NotImplementedError("self reference is not fully implemented")
-            else:
-                # "/media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/sd-image-variations-diffusers"
+            else: 
                 ref_unet: UNet2DConditionModel = UNet2DConditionModel.from_pretrained(
                     attn_config.self_attn_ref_other_model_name, subfolder="unet", torch_dtype=self.unet.dtype
                 )

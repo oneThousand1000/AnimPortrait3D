@@ -16,7 +16,6 @@ import face_alignment
 from tqdm import tqdm
 import imageio
 
-from flame_model.flame import FlameHead
 from smplx_model.smplx import SMPLXModel
 import shutil
 from kaolin.metrics.pointcloud import chamfer_distance
@@ -116,49 +115,6 @@ def mask_mesh(v, f, m, is_all=False):
     return res_v, res_f
 
 
-def get_fitted_flame_mesh(
-        flame_model,
-    fitted_shape,
-    fitted_expr,
-    fitted_rotation,
-    fitted_neck,
-    fitted_jaw,
-    fitted_eyes,
-    fitted_trans,
-        fitted_scale, 
-    device,
-):
- 
-
-    ret_vals = flame_model(
-        fitted_shape,
-        fitted_expr,
-        rotation=fitted_rotation,
-        neck=fitted_neck,
-        jaw=fitted_jaw,
-        eyes=fitted_eyes,
-        translation= torch.zeros(1, 3).to(device),
-        zero_centered_at_root_node=False,
-        return_landmarks=False,
-        return_verts_cano=True,
-        static_offset=torch.tensor(
-            [0, 0, 0], dtype=torch.float32).to(device).reshape(1, 3),
-        remove_hair=False,
-        remove_collar=False,
-    )
-
-    fitted_flame_verts = ret_vals['vertices']
-    fitted_flame_faces = ret_vals['faces']
-
-    # translate to portrait3d mesh space
-    fitted_flame_verts = fitted_flame_verts * \
-        fitted_scale + fitted_trans
-     
-
- 
-
-    return fitted_flame_verts, fitted_flame_faces 
-
 
 if __name__ == '__main__':
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -200,8 +156,6 @@ if __name__ == '__main__':
                              expr_params=expr_params,
                              add_teeth=True).to(device)
 
-    flame_model = FlameHead(shape_params=shape_params,
-                            expr_params=expr_params,add_teeth=True).to(device)
     renderer = NvdiffrastRenderer(device=device)
 
     # ======================================================
@@ -257,8 +211,6 @@ if __name__ == '__main__':
     debug_raw_mesh = get_pytorch3d_mesh(raw_mesh_vertices, raw_mesh_faces)
     debug_aligned_smplx_mesh = get_pytorch3d_mesh(
         res_vals['verts'][0].detach(), res_vals['faces'])
-    # debug_aligned_smplx_mesh = get_pytorch3d_mesh(
-    #     res_vals['flame_verts'][0].detach(), flame_model.faces)
     debug_video_path = os.path.join(mesh_fit_log_dir, 'smplx_fitting/log/aligned_smplx_mesh.mp4')
     render_mesh_comparision(debug_raw_mesh, debug_aligned_smplx_mesh,
                             renderer, debug_video_path, save_keyframes=True)

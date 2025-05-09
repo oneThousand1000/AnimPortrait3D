@@ -11,7 +11,7 @@ from scripts.utils import session, simple_preprocess
 import os
 
 training_config = "app/custom_models/image2mvimage.yaml"
-checkpoint_path = "/media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/img2mvimg/unet_state_dict.pth"
+checkpoint_path = "./ckpt/img2mvimg/unet_state_dict.pth"
 assert os.path.exists(training_config) and os.path.exists(checkpoint_path), "Please provide valid training_config and checkpoint_path"
 trainer, pipeline = load_pipeline(training_config, checkpoint_path)
 # pipeline.enable_model_cpu_offload()

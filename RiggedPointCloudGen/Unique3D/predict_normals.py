@@ -76,4 +76,3 @@ if __name__ == "__main__":
                        run_sr=run_sr )
 
 
-# python predict_normals.py  --data_dir=/home/yiqian/code/3DAvatar/high-quality-Portrait3D-mesh-based/mesh_optim/test_data --sr_scale=1

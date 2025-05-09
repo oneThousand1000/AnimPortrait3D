@@ -226,7 +226,6 @@ if __name__ == "__main__":
     
     for i in tqdm.tqdm(range(total_len)):
         
-        # gt_image_path = f'/media/yiqian/data/datasets/flame/GaussianAvatars/{subject_name}_train/cluster/ikarus/sqian/project/dynamic-head-avatars/code/multi-view-head-tracker/export/{exp_name}/images/{i:05d}_{cam_id:02d}.png'
         exp = torch.tensor(exp_all[i:i+1], dtype=torch.float32).cuda()
 
         pose = torch.tensor(

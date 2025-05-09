@@ -99,21 +99,10 @@ if [ ! -f $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame
 
     
 
-    wget --post-data "username=$username&password=$password" 'https://download.is.tue.mpg.de/download.php?domain=flame&resume=1&sfile=FLAME2023.zip' -O "$project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2023.zip" --no-check-certificate --continue
+    wget --post-data "username=$username&password=$password" 'https://download.is.tue.mpg.de/download.php?domain=flame&resume=1&sfile=FLAME2020.zip' -O "$project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2020.zip" --no-check-certificate --continue
+    unzip $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2020.zip 
 
-    unzip $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2023.zip 
-    rm $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2023.zip
-    
-    rm $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/flame2023_no_jaw.pkl
 
-    wget --post-data "username=$username&password=$password" 'https://download.is.tue.mpg.de/download.php?domain=flame&sfile=FLAME2017.zip&resume=1' -O "$project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2017.zip" --no-check-certificate --continue
-
-    unzip $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2017.zip
-    rm $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME2017.zip
-    rm $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/female_model.pkl
-    rm $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/male_model.pkl
-
-    rm $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/*.pdf
 fi
 
 
@@ -121,9 +110,7 @@ fi
 if [ ! -f $project_root/RiggedPointCloudGen/mesh_optim/smplx_model/assets/SMPLX_NEUTRAL_2020.npz ]; then
 
     cp $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME_masks.pkl  $project_root/RiggedPointCloudGen/mesh_optim/smplx_model/assets/FLAME_masks.pkl
-    cp $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME_masks.pkl  $project_root/GSAvatar/smplx_model/assets/FLAME_masks.pkl
-    cp $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/flame2023.pkl $project_root/RiggedPointCloudGen/mesh_optim/flame_model/assets/flame/flame2023.pkl
-    cp $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME_masks.pkl $project_root/RiggedPointCloudGen/mesh_optim/flame_model/assets/flame/FLAME_masks.pkl
+    cp $project_root/RiggedPointCloudGen/mesh_optim/flame_fitting/asset/flame/FLAME_masks.pkl  $project_root/GSAvatar/smplx_model/assets/FLAME_masks.pkl 
     
  
     echo -e "${Green}You need to register at https://smplx.is.tue.mpg.de${NC}"
@@ -193,6 +180,9 @@ if [ ! -d $pretrained_model_dir/unique3d/ckpt/image2normal ]; then
     mkdir -p $pretrained_model_dir/unique3d/ckpt/image2normal
     mv $pretrained_model_dir/tmp/ckpt/image2normal $pretrained_model_dir/unique3d/ckpt
 
+    mkdir -p $project_root/RiggedPointCloudGen/Unique3D/ckpt 
+    mv $pretrained_model_dir/tmp/ckpt/realesrgan-x4.onnx  $project_root/RiggedPointCloudGen/Unique3D/ckpt 
+
     rm -r $pretrained_model_dir/tmp
 fi
 
@@ -206,7 +196,7 @@ fi
 # Download sapiens
 mkdir -p $pretrained_model_dir/sapiens/pretrain/checkpoints
 mkdir -p $pretrained_model_dir/sapiens/seg/checkpoints
-if [ ! -d $pretrained_model_dir/sapiens/pretrain/checkpoints/sapiens_1b/sapiens_1b_epoch_173_clean.pth ]; then
+if [ ! -f $pretrained_model_dir/sapiens/pretrain/checkpoints/sapiens_1b/sapiens_1b_epoch_173_clean.pth ]; then
     echo -e "${Blue}Downloading to pretrained sapiens to $pretrained_model_dir/sapiens/pretrain/checkpoints/sapiens_1b${NC}"
     huggingface-cli download facebook/sapiens-pretrain-1b  --local-dir $pretrained_model_dir/sapiens/pretrain/checkpoints/sapiens_1b 
     

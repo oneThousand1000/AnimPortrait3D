@@ -1,4 +1,4 @@
-pretrained_model_name_or_path: "/media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/img2mvimg"
+pretrained_model_name_or_path: "./ckpt/img2mvimg"
 mixed_precision: "bf16"
 
 init_config: 
@@ -27,7 +27,7 @@ init_config:
   # for self attention ref
   init_self_attn_ref: False
   self_attn_ref_position: "attn1"
-  self_attn_ref_other_model_name: "/media/yiqian/data/datasets/models/pretrained/unique3d/ckpt/sd-image-variations-diffusers"
+  self_attn_ref_other_model_name: "lambdalabs/sd-image-variations-diffusers"
   self_attn_ref_pixel_wise_crosspond: False
   self_attn_ref_effect_on: "all"
   
